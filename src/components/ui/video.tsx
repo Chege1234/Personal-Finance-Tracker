@@ -11,6 +11,7 @@
  */
 
 import {
+    Player,
     BigPlayButton,
     ControlBar,
     PlayToggle,
@@ -102,6 +103,7 @@ display: block;
                     <TimeDivider key="time-divider" />
                     <DurationDisplay key="duration-display" />
                     <ProgressControl key="progress-control" />
+                    {/* @ts-expect-error missing props injected by ControlBar */}
                     <FullscreenToggle key="fullscreen-toggle" />
                 </ControlBar>
                 <BigPlayButton position="center" />
