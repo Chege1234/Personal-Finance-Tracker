@@ -13,7 +13,7 @@ import InstallPrompt from '@/components/common/InstallPrompt';
 
 const App: React.FC = () => {
     return (
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
             <Router>
                 <AuthProvider>
                     <RouteGuard>
