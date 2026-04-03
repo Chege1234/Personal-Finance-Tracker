@@ -1,0 +1,221 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Premium Finance App - Light Mode */
+        --background: 220 15% 97%;
+        --foreground: 220 30% 15%;
+        --card: 0 0% 100%;
+        --card-foreground: 220 30% 15%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 220 30% 15%;
+        --primary: 220 40% 25%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 220 15% 50%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 220 15% 95%;
+        --muted-foreground: 220 10% 45%;
+        --accent: 160 60% 45%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 70% 50%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 220 15% 88%;
+        --input: 220 15% 88%;
+        --ring: 160 60% 45%;
+        --success: 160 60% 45%;
+        --warning: 38 92% 50%;
+        --info: 220 40% 25%;
+        --chart-1: 160 60% 45%;
+        --chart-2: 220 40% 25%;
+        --chart-3: 200 50% 50%;
+        --chart-4: 180 55% 40%;
+        --chart-5: 140 50% 50%;
+        --sidebar-background: 220 30% 12%;
+        --sidebar-foreground: 220 15% 95%;
+        --sidebar-primary: 160 60% 45%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 220 25% 18%;
+        --sidebar-accent-foreground: 220 15% 95%;
+        --sidebar-border: 220 20% 20%;
+        --sidebar-ring: 160 60% 45%;
+
+        /* Category Colors - Light Mode */
+        --category-food: 122 39% 49%;
+        /* #4CAF50 */
+        --category-transport: 36 100% 50%;
+        /* #FF9800 */
+        --category-bills: 4 90% 58%;
+        /* #F44336 */
+        --category-entertainment: 291 64% 42%;
+        /* #9C27B0 */
+        --category-shopping: 199 98% 48%;
+        /* #03A9F4 */
+        --category-health: 187 100% 42%;
+        /* #00BCD4 */
+        --category-education: 45 100% 51%;
+        /* #FFC107 */
+        --category-savings: 88 50% 53%;
+        /* #8BC34A */
+        --category-personal: 340 82% 52%;
+        /* #E91E63 */
+        --category-other: 220 13% 46%;
+        /* Muted gray */
+    }
+
+    .dark {
+        /* Premium Finance-Grade Dark Mode */
+        --background: 210 40% 8%;
+        /* #0B1220 - deep blue-black */
+        --foreground: 220 9% 91%;
+        /* #E5E7EB - soft white */
+        --card: 215 28% 14%;
+        /* #111827 - surface */
+        --card-foreground: 220 9% 91%;
+        /* #E5E7EB */
+        --popover: 215 28% 14%;
+        /* #111827 */
+        --popover-foreground: 220 9% 91%;
+        --primary: 160 84% 39%;
+        /* #10B981 - emerald accent */
+        --primary-foreground: 220 9% 91%;
+        --secondary: 220 9% 65%;
+        /* #9CA3AF - muted gray */
+        --secondary-foreground: 220 9% 91%;
+        --muted: 217 33% 17%;
+        /* #1F2937 - elevated */
+        --muted-foreground: 220 9% 65%;
+        /* #9CA3AF */
+        --accent: 160 84% 39%;
+        /* #10B981 - emerald */
+        --accent-foreground: 220 9% 91%;
+        --destructive: 0 72% 51%;
+        /* #EF4444 - overspend red */
+        --destructive-foreground: 220 9% 91%;
+        --border: 217 33% 17%;
+        /* #1F2937 */
+        --input: 217 33% 17%;
+        --ring: 160 84% 39%;
+        --success: 142 71% 45%;
+        /* #22C55E - under budget */
+        --warning: 38 92% 50%;
+        /* #F59E0B */
+        --info: 199 89% 48%;
+        /* #38BDF8 */
+        --chart-1: 160 84% 39%;
+        --chart-2: 142 71% 45%;
+        --chart-3: 199 89% 48%;
+        --chart-4: 38 92% 50%;
+        --chart-5: 0 72% 51%;
+        --sidebar-background: 210 40% 8%;
+        --sidebar-foreground: 220 9% 91%;
+        --sidebar-primary: 160 84% 39%;
+        --sidebar-primary-foreground: 220 9% 91%;
+        --sidebar-accent: 217 33% 17%;
+        --sidebar-accent-foreground: 220 9% 91%;
+        --sidebar-border: 217 33% 17%;
+        --sidebar-ring: 160 84% 39%;
+
+        /* Category Colors - Dark Mode (Fixed Palette) */
+        --category-food: 122 39% 49%;
+        /* #4CAF50 - Green */
+        --category-transport: 36 100% 50%;
+        /* #FF9800 - Orange */
+        --category-bills: 4 90% 58%;
+        /* #F44336 - Red */
+        --category-entertainment: 291 64% 42%;
+        /* #9C27B0 - Purple */
+        --category-shopping: 199 98% 48%;
+        /* #03A9F4 - Blue */
+        --category-health: 187 100% 42%;
+        /* #00BCD4 - Cyan */
+        --category-education: 45 100% 51%;
+        /* #FFC107 - Amber */
+        --category-savings: 88 50% 53%;
+        /* #8BC34A - Light Green */
+        --category-personal: 340 82% 52%;
+        /* #E91E63 - Pink */
+        --category-other: 220 9% 46%;
+        /* #6B7280 - Muted */
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Smooth transitions for theme switching */
+    * {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+    }
+
+    /* Preserve animation and transform transitions */
+    *:where([class*="animate-"], [class*="transition-transform"]) {
+        transition-property: transform, opacity;
+    }
+}
+
+@layer utilities {
+    .text-success {
+        color: hsl(var(--success));
+    }
+
+    .text-warning {
+        color: hsl(var(--warning));
+    }
+
+    .bg-success {
+        background-color: hsl(var(--success));
+    }
+
+    .bg-warning {
+        background-color: hsl(var(--warning));
+    }
+
+    /* Premium number display */
+    .number-display {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+    }
+
+    /* Card shadows - Light mode */
+    .card-shadow {
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+    }
+
+    .card-shadow-lg {
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    }
+
+    /* Card shadows - Dark mode (subtle elevation) */
+    .dark .card-shadow {
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    }
+
+    .dark .card-shadow-lg {
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+    }
+
+    /* Hover states - increase brightness, not saturation */
+    .dark button:hover:not(:disabled),
+    .dark [role="button"]:hover:not(:disabled) {
+        filter: brightness(1.1);
+    }
+}

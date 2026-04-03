@@ -1,0 +1,439 @@
+# Task: Build Personal Finance Tracker Application
+
+## Plan
+- [x] Step 1: Design System & Color Scheme
+  - [x] Update index.css with finance-focused color scheme
+  - [x] Enhanced with vibrant purple, cyan, and pink colors
+- [x] Step 2: Database Setup
+  - [x] Initialize Supabase
+  - [x] Create budgets table
+  - [x] Create spending_entries table
+  - [x] Set up RLS policies
+  - [x] Add start_date field to track budget creation date
+- [x] Step 3: Types & API Layer
+  - [x] Create types in index.ts with database types
+  - [x] Create db/api.ts with database functions
+  - [x] Create utility functions for date and currency
+  - [x] Updated Budget type with start_date
+- [x] Step 4: Core Components
+  - [x] BudgetCard component with colorful gradients
+  - [x] DailyBalance component with enhanced visuals
+  - [x] SpendingForm component with gradient buttons
+  - [x] SpendingList component with hover effects
+  - [x] Charts components (monthly trend, category analysis)
+- [x] Step 5: Pages
+  - [x] Dashboard page with gradient headers
+  - [x] BudgetSetup page with colorful design
+  - [x] History page with vibrant cards
+- [x] Step 6: Routes & Navigation
+  - [x] Update routes.tsx
+- [x] Step 7: Mid-Month Budget Logic
+  - [x] Updated carryover calculation to start from budget creation date
+  - [x] Cleared existing data for fresh start
+- [x] Step 8: Authentication System
+  - [x] Email/password login and signup
+  - [x] User-specific data isolation with RLS
+  - [x] Profile creation trigger
+  - [x] Protected routes
+- [x] Step 9: PWA Installation
+  - [x] Web manifest and service worker
+  - [x] Install prompt component
+  - [x] Offline functionality
+- [x] Step 10: Password Reset & Admin Panel
+  - [x] Forgot password flow
+  - [x] Reset password page
+  - [x] Admin panel for viewing users
+- [x] Step 11: Critical Bug Fixes
+  - [x] Fixed budget creation bug (user_id NOT NULL)
+  - [x] Fixed spending_entries user_id constraint
+  - [x] Disabled email verification to prevent rate limits
+  - [x] Fixed profile creation trigger (fires on INSERT)
+  - [x] Fixed React hooks import issue
+- [x] Step 12: RLS Policy Fix
+  - [x] Recreated RLS policies for budgets table
+  - [x] Recreated RLS policies for spending_entries table
+  - [x] Verified all authenticated users can create budgets
+  - [x] Enhanced error messages for debugging
+  - [x] Confirmed data isolation between users
+- [x] Step 13: Database Schema Fix
+  - [x] Fixed unique constraint from (month, year) to (user_id, month, year)
+  - [x] Enabled multi-user budget creation for same month/year
+  - [x] Maintained per-user budget uniqueness
+  - [x] Verified constraint change with database queries
+- [x] Step 14: UI Enhancements
+  - [x] Added date display at top of dashboard (e.g., "Saturday, February 6, 2026")
+  - [x] Implemented spending history grouping by date
+  - [x] Added date headers with daily totals
+  - [x] Enhanced visual separation between dates
+  - [x] Added "Today" and "Yesterday" labels for recent dates
+- [x] Step 15: Premium UI Redesign
+  - [x] Updated color system to professional navy/slate and emerald/teal
+  - [x] Added Inter font for modern typography
+  - [x] Redesigned Dashboard with clear hierarchy
+  - [x] Redesigned all finance components (cards, forms, lists)
+  - [x] Implemented card-based layout with subtle shadows
+  - [x] Added number-display utility for tabular numbers
+  - [x] Removed gradients and bright colors for calm aesthetic
+  - [x] Enhanced spacing and whitespace
+  - [x] Prioritized today's allowance above remaining budget
+  - [x] Made available amount most prominent in daily card
+- [x] Step 16: Testing & Validation
+  - [x] Run lint and fix issues
+- [x] Step 17: Analytics & History Redesign
+  - [x] Enhanced categorization system with more keywords
+  - [x] Added category icons and colors
+  - [x] Created comprehensive Analytics page with insights
+  - [x] Implemented pie chart for category distribution
+  - [x] Added line chart for spending over time
+  - [x] Created AI insights with user-controlled full report
+  - [x] Redesigned History page for transaction management
+  - [x] Added category editing functionality
+  - [x] Implemented month and category filtering
+  - [x] Added updateSpendingEntry API function
+- [x] Step 18: Final Testing
+  - [x] Run lint and verify all changes
+- [x] Step 19: Fix Categorization System
+  - [x] Created database function to recategorize entries
+  - [x] Applied migration to recategorize all existing entries
+  - [x] Added automatic categorization trigger for new entries
+  - [x] Improved categorizeSpending function with edge case handling
+  - [x] Verified categorization logic with test cases
+- [x] Step 20: Layout Improvements & Dark Mode
+  - [x] Reordered Dashboard layout (Record Spending after Today's Allowance)
+  - [x] Created ThemeProvider component for theme management
+  - [x] Created ThemeToggle button component
+  - [x] Added theme toggle to Header
+  - [x] Integrated ThemeProvider in App.tsx
+  - [x] Added dark mode category color variables to index.css
+  - [x] Updated CATEGORY_COLORS to use CSS variables
+  - [x] Enhanced card shadows for dark mode
+  - [x] Verified all components work in both light and dark modes
+- [x] Step 21: Final Dashboard Layout & Categorization Fix
+  - [x] Reordered Dashboard: Today's Allowance → Record Spending → Today's Spending → Remaining Budget → Monthly Overview → Spending History
+  - [x] Updated categorizeSpending to use description as category if no keyword match
+  - [x] Updated database recategorize_entry function to return description instead of "Other"
+  - [x] Modified auto_categorize_spending trigger to preserve custom categories
+  - [x] Updated Analytics to group small/custom categories as "Other" for display only
+  - [x] Enhanced History page to show custom categories with proper icons
+  - [x] Added "Uncategorized" category for empty descriptions
+  - [x] Ensured "Other" is only used in analytics for grouping, not as stored category
+  - [x] Verified pie charts show meaningful category distribution
+- [x] Step 22: Premium Finance-Grade Dark Mode & Category System Overhaul
+  - [x] Implemented premium dark mode with deep blue-black background (#0B1220)
+  - [x] Updated all dark mode colors to finance-grade palette (surfaces, text, accents)
+  - [x] Added smooth 0.3s transitions for theme switching
+  - [x] Enhanced card shadows for dark mode with subtle elevation
+  - [x] Implemented hover states with brightness increase (not saturation)
+  - [x] Redefined category system: Food, Transport, Bills, Entertainment, Shopping, Health, Education, Savings
+  - [x] Updated CATEGORY_KEYWORDS with exact mappings per requirements
+  - [x] Implemented fixed color palette for categories (Green, Orange, Red, Purple, Blue, Cyan, Amber, Light Green)
+  - [x] Updated CATEGORY_ICONS with new category names
+  - [x] Updated CATEGORY_COLORS to use CSS variables with fixed palette
+  - [x] Applied database migration to recategorize all entries with new system
+  - [x] Updated Analytics page to use new standard categories
+  - [x] Ensured multi-color pie chart validation
+  - [x] Verified professional, calm, trustworthy dark mode appearance
+- [x] Step 23: Smart Semantic Categorization & Premium Donut Chart
+  - [x] Created categories table with persistent color storage
+  - [x] Implemented smart categorization with fuzzy matching (Levenshtein distance + token similarity)
+  - [x] Created smartCategorize function with 0.75 similarity threshold
+  - [x] Implemented automatic category merging based on semantic similarity
+  - [x] Added fixed color palette rotation (#5B6CFF, #19C37D, #F59E0B, #EF4444, #8B5CF6, #06B6D4, #10B981, #EC4899)
+  - [x] Created premium donut chart component (SpendingByCategoryChart)
+  - [x] Implemented donut chart with legend layout (chart left, legend right)
+  - [x] Added rounded slice edges, gaps between slices, no labels on chart
+  - [x] Created clean legend with colored dots, category names, and right-aligned amounts
+  - [x] Updated SpendingForm to use smartCategorize instead of keyword matching
+  - [x] Updated Analytics page to fetch categories from database
+  - [x] Ensured colors are persisted and never assigned at render time
+  - [x] Verified multi-color chart rendering with unique colors per category
+  - [x] Implemented quality checks for category merging and color uniqueness
+- [x] Step 24: Fix Existing Categories and Colors for All Users
+  - [x] Mapped old category names to new standardized names (Food & Dining → Food, Transportation → Transport, etc.)
+  - [x] Updated all spending_entries to use new category names
+  - [x] Ensured all users have standard 8 categories with correct colors
+  - [x] Created categories for custom category names that exist in spending_entries
+  - [x] Assigned colors deterministically based on category name hash for consistency
+  - [x] Applied ON CONFLICT DO UPDATE to fix any existing categories with wrong colors
+  - [x] Verified all users have complete category set with proper color palette
+- [x] Step 25: Fix Duplicate Colors and Category Fragmentation
+  - [x] Created get_unique_color_for_user() PostgreSQL function for deterministic color assignment
+  - [x] Fixed all duplicate colors across all users (Bills/Crisps/Soap, Biscuit/Education, Savings/Wallet, etc.)
+  - [x] Recategorized fragmented items into standard categories (Biscuit/Crisps/Drink → Food, Fare → Transport, Soap/Wallet → Shopping)
+  - [x] Deleted orphaned categories with no spending entries
+  - [x] Removed weird multi-line category "60-offering\n40-smokie" and moved to Food
+  - [x] Verified all users now have unique colors per category (color_count=1 for all)
+  - [x] Enhanced CATEGORY_KEYWORDS with more items (biscuit, crisps, drink, fare, soap, wallet, etc.)
+  - [x] Lowered similarity threshold from 0.75 to 0.5 for more aggressive category matching
+  - [x] Added single-word item detection that defaults to Shopping if no better match
+  - [x] Updated smartCategorize to prevent unnecessary category creation
+  - [x] Ensured keyword matching is most aggressive (checked first)
+  - [x] Validated no duplicate colors remain in database
+- [x] Step 26: Enhanced Overspent Display in Daily Balance Card
+  - [x] Updated DailyBalanceCard to show clear overspent state
+  - [x] When overspent: Display "Available Now" as 0 in muted color
+  - [x] Added separate "Overspent" section in large red text showing overspent amount
+  - [x] Changed "Spent Today" to red color when user is overspent
+  - [x] Maintained existing carryover display logic
+  - [x] Ensured clear visual hierarchy: 0 available → Overspent amount in red
+  - [x] Removed Budget vs Actual weekly chart (user requested removal)
+  - [x] Cleaned up weekly calculation logic from Analytics page
+  - [x] Deleted BudgetVsActualChart component file
+  - [x] Verified lint passes with no errors
+- [x] Step 27: Implement Collapsible Spending History
+  - [x] Added expand/collapse functionality to SpendingList component
+  - [x] Imported ChevronDown and ChevronRight icons from lucide-react
+  - [x] Created expandedDates state using Set to track which dates are expanded
+  - [x] Set today's date as expanded by default (new Set([today]))
+  - [x] Implemented toggleDate function to add/remove dates from expanded set
+  - [x] Made date headers clickable buttons with hover effect (hover:bg-accent/5)
+  - [x] Added chevron icons that change based on expanded state (ChevronDown when expanded, ChevronRight when collapsed)
+  - [x] Added entry count display next to date label (e.g., "3 entries")
+  - [x] Conditionally render entries only when date is expanded (isExpanded && ...)
+  - [x] Added left padding (pl-6) to entries for visual hierarchy
+  - [x] Maintained all existing functionality (delete, date formatting, totals)
+  - [x] Ensured today's entries are always visible by default
+  - [x] Made interface cleaner and more organized with collapsible sections
+- [x] Step 28: Replace Finance Tracker Logo
+  - [x] Located existing logo in Header component (src/components/layouts/Header.tsx)
+  - [x] Replaced Wallet icon and gradient text with new logo image
+  - [x] Used provided logo URL directly: https://miaoda-conversation-file.s3cdn.medo.dev/user-9fxfm5xqp14w/conv-9fxfnx2x3q4g/20260210/file-9j8lebfee96o.png
+  - [x] Set proper dimensions (h-12 w-auto) for optimal display
+  - [x] Added object-contain class to maintain aspect ratio
+  - [x] Wrapped logo in Link component for navigation to home page
+  - [x] Added descriptive alt text: "Personal Finance Tracker Logo"
+  - [x] Removed unused Wallet icon import
+  - [x] Ensured logo is properly centered and positioned in header
+  - [x] Verified logo displays correctly at proper resolution
+  - [x] Maintained responsive layout and header functionality
+- [x] Step 29: Add Finance Tracker Text and Restrict Delete to Current Day
+  - [x] Added "Finance Tracker" text next to logo in Header component
+  - [x] Styled text with text-xl font-bold text-foreground for clear visibility
+  - [x] Positioned text with gap-3 spacing from logo for proper layout
+  - [x] Restricted delete functionality to current day only in SpendingList
+  - [x] Added isToday check in renderEntry function (entry.date === today)
+  - [x] Wrapped delete button (AlertDialog) in conditional rendering {isToday && ...}
+  - [x] Past entries no longer show delete button or trash icon
+  - [x] Only current day entries display the delete option
+  - [x] Maintained all other entry display functionality (description, category, time, amount)
+  - [x] Ensured proper spacing even when delete button is not shown
+  - [x] Verified lint passes with no errors
+- [x] Step 30: Update Logo to New Design
+  - [x] Replaced logo URL in Header component with new design
+  - [x] Updated from file-9j8lebfee96o.png to file-9k0hknwuspvk.png
+  - [x] Maintained "Finance Tracker" text next to logo
+  - [x] Kept all existing styling and positioning (h-12 w-auto object-contain)
+  - [x] Verified logo displays correctly with proper dimensions
+  - [x] Ensured responsive layout remains intact
+- [x] Step 31: Make Header Non-Sticky and Enhance History Page
+  - [x] Removed sticky positioning from Header component
+  - [x] Changed from "sticky top-0 z-50" to just "w-full" for disappearing header
+  - [x] Header now scrolls away with page content instead of staying fixed
+  - [x] Implemented collapsible dates in History page
+  - [x] Added expandedDates state using Set (starts empty - all collapsed)
+  - [x] Added toggleDate function to expand/collapse date sections
+  - [x] Made date headers clickable buttons with chevron icons
+  - [x] ChevronDown when expanded, ChevronRight when collapsed
+  - [x] Added entry count display next to date label
+  - [x] Entries only show when date is expanded (isExpanded && ...)
+  - [x] All dates start collapsed by default (unlike Dashboard where today is expanded)
+  - [x] Removed all delete functionality from History page
+  - [x] Removed Trash2 icon import and AlertDialog for delete
+  - [x] Removed handleDelete function completely
+  - [x] Removed deleteSpendingEntry import from db/api
+  - [x] Only Edit button remains for each entry (no delete option)
+  - [x] Users can still edit categories but cannot delete historical entries
+  - [x] Added left padding (pl-6) to entries for visual hierarchy
+  - [x] Maintained hover effects and transitions for better UX
+- [x] Step 32: Implement AI-Enhanced Features
+  - [x] Created database tables for AI features (user_category_preferences, ai_insights)
+  - [x] Added indexes for performance optimization
+  - [x] Implemented RLS policies for data security
+  - [x] Created AI service module (src/lib/ai-service.ts) with comprehensive intelligence features
+  - [x] **Smart Category Learning**: System learns from user corrections
+    - Stores user's category preferences when they manually change categories
+    - Uses learned preferences for future auto-categorization
+    - Confidence scoring system (increases with usage)
+    - Exact and partial pattern matching for descriptions
+    - Falls back to keyword-based categorization if no learned preference
+  - [x] **Anomaly Detection**: Identifies unusual spending patterns
+    - Detects duplicate entries (same amount, description, date)
+    - Flags unusually high spending (2x category average)
+    - Identifies potential typos (e.g., 5000 instead of 50)
+    - Generates warnings for review
+  - [x] **Predictive Budget Alerts**: Proactive warnings based on patterns
+    - Analyzes day-of-week spending patterns
+    - Warns when typical spending for that day exceeds budget
+    - Predicts month-end budget status
+    - Suggests daily spending reductions to stay on track
+  - [x] **Smart Recommendations**: Personalized insights
+    - Month-over-month category comparison
+    - Identifies spending increases (>40% change)
+    - Highlights top spending categories
+    - Provides actionable suggestions
+  - [x] Created AIInsightsPanel component for displaying insights
+    - Shows insights with severity-based styling (info/warning/alert)
+    - Dismissible insights with X button
+    - Icon-based visual indicators
+    - Color-coded by severity level
+  - [x] Integrated AI into Dashboard
+    - Added AI insights generation on data load
+    - Displays AI Insights panel between spending form and today's list
+    - Generates insights from current and previous month data
+    - Saves insights to database for persistence
+  - [x] Enhanced SpendingForm with smart categorization
+    - Uses getSmartCategoryWithLearning instead of basic smartCategorize
+    - Automatically applies learned preferences
+    - Improves accuracy over time
+  - [x] Enhanced History page with learning capability
+    - Category edits trigger learning function
+    - System remembers user preferences
+    - Toast notification confirms AI learning
+  - [x] Added TypeScript types for AI features
+    - UserCategoryPreference interface
+    - AIInsight interface with InsightType and InsightSeverity
+    - Proper type definitions for all AI data structures
+  - [x] Implemented insight management functions
+    - saveInsights: Batch save insights to database
+    - getActiveInsights: Retrieve unread, non-expired insights
+    - markInsightAsRead: Dismiss insights
+    - generateAllInsights: Orchestrate all AI analysis
+  - [x] Fixed TypeScript compilation issues with type assertions
+  - [x] Passed npm run lint with no errors
+- [x] Step 33: Reorganize AI Insights and Add Navigation
+  - [x] Removed AI Insights panel from Dashboard (home page)
+  - [x] Removed generateAIInsights function call from Dashboard
+  - [x] Removed AIInsightsPanel import from Dashboard
+  - [x] Removed generateAllInsights and saveInsights imports from Dashboard
+  - [x] Renumbered Dashboard sections (removed section 3, updated 4→3, 5→4, 6→5, 7→6)
+  - [x] Added AI Insights to Analytics page
+    - Imported AIInsightsPanel component
+    - Imported generateAllInsights and saveInsights functions
+    - Added generateAIInsights function to Analytics
+    - Integrated AI insights generation in loadData function
+    - Placed AIInsightsPanel after month selector, before spending overview
+  - [x] Enhanced Analytics page navigation
+    - Added useNavigate hook and navigation imports (ArrowLeft, Home, History)
+    - Added back button (arrow icon) in header
+    - Added Home button with icon (navigates to /)
+    - Added History button with icon (navigates to /history)
+    - Buttons show text on larger screens (hidden sm:inline)
+    - Responsive layout with flex-wrap for mobile
+  - [x] Enhanced History page navigation
+    - Added navigation imports (Home, TrendingUp)
+    - Changed back button from ghost to outline variant for consistency
+    - Added Home button with icon (navigates to /)
+    - Added Analytics button with TrendingUp icon (navigates to /analytics)
+    - Buttons show text on larger screens (hidden sm:inline)
+    - Responsive layout with flex-wrap for mobile
+    - Consistent styling with Analytics page
+  - [x] Navigation features
+    - All pages now have clear navigation options
+    - Users can easily move between Home, Analytics, and History
+    - Back arrow button for quick return to home
+    - Icon-based navigation for mobile devices
+    - Text labels visible on desktop for clarity
+  - [x] Passed npm run lint with no errors
+- [x] Step 34: Remove AI Features Completely
+  - [x] Removed AI Insights from Analytics page
+    - Removed AIInsightsPanel import and component
+    - Removed generateAllInsights and saveInsights imports
+    - Removed getDaysInMonth import (no longer needed)
+    - Removed generateAIInsights function
+    - Removed AI insights generation call from loadData
+    - Cleaned up Analytics page to focus on charts and statistics
+  - [x] Reverted SpendingForm to basic categorization
+    - Removed getSmartCategoryWithLearning import
+    - Re-added smartCategorize import from smart-categorization
+    - Changed category assignment to use await smartCategorize(data.description)
+    - Removed AI learning functionality
+  - [x] Reverted History page category editing
+    - Removed learnFromCategoryCorrection import
+    - Removed AI learning call from handleCategoryUpdate
+    - Updated toast message to remove AI learning reference
+    - Simplified to basic category update functionality
+  - [x] Deleted AI component files
+    - Deleted /src/components/finance/AIInsightsPanel.tsx
+    - Deleted /src/lib/ai-service.ts
+  - [x] Removed AI types from types/index.ts
+    - Removed UserCategoryPreference interface
+    - Removed InsightType and InsightSeverity types
+    - Removed AIInsight interface
+    - Kept only core finance types
+  - [x] Dropped AI database tables
+    - Created migration: drop_ai_features
+    - Dropped ai_insights table with CASCADE
+    - Dropped user_category_preferences table with CASCADE
+    - Cleaned up database schema
+  - [x] Maintained navigation enhancements
+    - Kept improved navigation on Analytics and History pages
+    - Preserved back buttons and page navigation
+    - Maintained responsive design
+  - [x] Passed npm run lint with no errors
+- [x] Step 35: Add Budget Edit Functionality
+  - [x] Created updateBudget function in db/api.ts
+    - Accepts budgetId, monthlyAmount, and daysInMonth parameters
+    - Recalculates daily_budget automatically (monthlyAmount / daysInMonth)
+    - Updates both monthly_amount and daily_budget fields
+    - Includes authentication checks and error handling
+    - Returns updated Budget object
+  - [x] Enhanced Dashboard with edit budget feature
+    - Added Dialog, Input, and Label imports from shadcn/ui
+    - Added Settings icon import from lucide-react
+    - Added useToast hook for notifications
+    - Added updateBudget import from db/api
+    - Added state management (isEditDialogOpen, newBudgetAmount, isUpdating)
+  - [x] Implemented budget edit handlers
+    - handleEditBudget: Opens dialog and pre-fills current budget amount
+    - handleUpdateBudget: Validates input, calls API, shows toast, reloads data
+    - Input validation for positive numbers
+    - Loading state during update
+    - Error handling with user-friendly messages
+  - [x] Added Edit Budget button to Dashboard header
+    - Positioned next to Analytics and History buttons
+    - Settings icon with "Edit Budget" text (hidden on mobile)
+    - Outline variant for consistency
+    - Small size (sm) for compact appearance
+  - [x] Created Edit Budget Dialog
+    - Clear title and description with current month/year
+    - Number input for budget amount with step="0.01"
+    - Shows current budget amount for reference
+    - Real-time preview of new daily budget calculation
+    - Cancel and Update buttons with proper states
+    - Disabled state during update operation
+    - Input validation (must be positive number)
+  - [x] User experience improvements
+    - Dialog shows current budget for easy reference
+    - Live calculation preview of new daily budget
+    - Success toast notification with formatted amount
+    - Automatic data reload after successful update
+    - Proper error messages for failed updates
+    - Responsive button layout (text hidden on mobile)
+  - [x] Passed npm run lint with no errors
+
+## Notes
+- Using rolling daily allowance logic with carryover mechanics
+- User authentication with email/password
+- AI categorization done client-side based on description keywords
+- Currency support: USD, KSH, Turkish Lira
+- Charts using recharts library (already available)
+- All core features implemented
+- Mid-month budget setup now works correctly - carryover starts from budget creation date, not day 1
+- Enhanced with vibrant purple (primary), cyan (secondary), and pink (accent) colors
+- Added gradients, shadows, and colorful borders throughout
+- PWA installable on all devices
+- Password reset via email
+- Admin panel for first user (admin role)
+- **CRITICAL FIX**: Made user_id NOT NULL in budgets and spending_entries tables
+- **CRITICAL FIX**: Disabled email verification to prevent signup rate limits
+- **CRITICAL FIX**: Profile creation trigger now fires immediately on signup
+- **CRITICAL FIX**: Fixed React hooks import causing app crash
+- **RLS FIX**: Recreated all RLS policies to ensure all authenticated users can create budgets
+- **RLS FIX**: Complete data isolation - users only see their own data
+- **RLS FIX**: Enhanced error messages show specific database errors
+- **SCHEMA FIX**: Changed unique constraint from (month, year) to (user_id, month, year)
+- **SCHEMA FIX**: Multiple users can now create budgets for the same month/year
+- **SCHEMA FIX**: Each user still limited to one budget per month/year period
+- Lint passed successfully
+- All users can successfully create budgets and manage their finances
+- Multi-user functionality fully operational
