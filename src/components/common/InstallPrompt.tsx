@@ -39,6 +39,7 @@ export default function InstallPrompt() {
 
         // Listen for the beforeinstallprompt event (Chrome/Edge/Android)
         const handleBeforeInstallPrompt = (e: Event) => {
+            e.preventDefault();
             setDeferredPrompt(e as BeforeInstallPromptEvent);
             if (!recentlyDismissed) {
                 // Show after a short delay so it doesn't pop up immediately on page load
