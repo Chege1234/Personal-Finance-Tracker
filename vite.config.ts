@@ -32,12 +32,14 @@ export default defineConfig({
                     {
                         src: 'icon-192.png',
                         sizes: '192x192',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: 'any'
                     },
                     {
                         src: 'icon-512.png',
                         sizes: '512x512',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: 'maskable'
                     },
                     {
                         src: 'icon-192.svg',
@@ -50,6 +52,22 @@ export default defineConfig({
                         sizes: '512x512',
                         type: 'image/svg+xml',
                         purpose: 'maskable'
+                    }
+                ],
+                screenshots: [
+                    {
+                        src: 'icon-512.png',
+                        sizes: '512x512',
+                        type: 'image/png',
+                        form_factor: 'wide',
+                        label: 'Personal Finance Tracker dashboard'
+                    },
+                    {
+                        src: 'icon-192.png',
+                        sizes: '192x192',
+                        type: 'image/png',
+                        form_factor: 'narrow',
+                        label: 'Personal Finance Tracker'
                     }
                 ]
             }

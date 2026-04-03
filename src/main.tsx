@@ -4,11 +4,6 @@ import "./index.css";
 import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 
-import { registerSW } from 'virtual:pwa-register';
-
-// Register service worker for PWA
-registerSW({ immediate: true });
-
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <AppWrapper>
