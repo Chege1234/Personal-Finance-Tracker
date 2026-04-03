@@ -30,40 +30,28 @@ export default defineConfig({
                 scope: '/',
                 icons: [
                     {
-                        src: 'icon-192.png',
+                        src: 'icon-192-v2.png',
                         sizes: '192x192',
                         type: 'image/png',
-                        purpose: 'any'
+                        purpose: 'any maskable'
                     },
                     {
-                        src: 'icon-512.png',
+                        src: 'icon-512-v2.png',
                         sizes: '512x512',
                         type: 'image/png',
-                        purpose: 'maskable'
-                    },
-                    {
-                        src: 'icon-192.svg',
-                        sizes: '192x192',
-                        type: 'image/svg+xml',
-                        purpose: 'any'
-                    },
-                    {
-                        src: 'icon-512.svg',
-                        sizes: '512x512',
-                        type: 'image/svg+xml',
-                        purpose: 'maskable'
+                        purpose: 'any maskable'
                     }
                 ],
                 screenshots: [
                     {
-                        src: 'icon-512.png',
+                        src: 'icon-512-v2.png',
                         sizes: '512x512',
                         type: 'image/png',
                         form_factor: 'wide',
                         label: 'Personal Finance Tracker dashboard'
                     },
                     {
-                        src: 'icon-192.png',
+                        src: 'icon-192-v2.png',
                         sizes: '192x192',
                         type: 'image/png',
                         form_factor: 'narrow',
