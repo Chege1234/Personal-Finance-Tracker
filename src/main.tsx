@@ -4,19 +4,10 @@ import "./index.css";
 import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 
+import { registerSW } from 'virtual:pwa-register';
+
 // Register service worker for PWA
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('/service-worker.js')
-            .then((registration) => {
-                console.log('Service Worker registered:', registration);
-            })
-            .catch((error) => {
-                console.log('Service Worker registration failed:', error);
-            });
-    });
-}
+registerSW({ immediate: true });
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
