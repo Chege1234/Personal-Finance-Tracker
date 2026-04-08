@@ -35,7 +35,11 @@ export default function Dashboard() {
     const loadData = async () => {
         setIsLoading(true);
         try {
-            const budgetData = await getBudgetForMonth(currentMonth, currentYear);
+            const [budgetData, monthEntries, todayData] = await Promise.all([
+                getBudgetForMonth(currentMonth, currentYear),
+                getSpendingEntriesForMonth(currentMonth, currentYear),
+                getSpendingEntriesForDate(today)
+            ]);
 
             if (!budgetData) {
                 navigate('/budget-setup');
@@ -43,11 +47,7 @@ export default function Dashboard() {
             }
 
             setBudget(budgetData);
-
-            const monthEntries = await getSpendingEntriesForMonth(currentMonth, currentYear);
             setMonthlyEntries(monthEntries);
-
-            const todayData = await getSpendingEntriesForDate(today);
             setTodayEntries(todayData);
 
             // Calculate daily balance

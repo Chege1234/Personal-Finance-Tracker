@@ -1,13 +1,15 @@
-import Dashboard from './pages/Dashboard';
-import BudgetSetup from './pages/BudgetSetup';
-import History from './pages/History';
-import Analytics from './pages/Analytics';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import AdminPanel from './pages/AdminPanel';
+import { lazy } from 'react';
 import type { ReactNode } from 'react';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const BudgetSetup = lazy(() => import('./pages/BudgetSetup'));
+const History = lazy(() => import('./pages/History'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const Login = lazy(() => import('./pages/Login'));
+const Signup = lazy(() => import('./pages/Signup'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+const AdminPanel = lazy(() => import('./pages/AdminPanel'));
 
 interface RouteConfig {
     name: string;

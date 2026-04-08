@@ -185,6 +185,11 @@ export const smartCategorize = async (description: string): Promise<string> => {
             const color = getNextColor(existingCategories);
             category = await createCategory(predefinedMatch, color);
         }
+        
+        if (!category) {
+            return 'Other';
+        }
+        
         return category.name;
     }
 

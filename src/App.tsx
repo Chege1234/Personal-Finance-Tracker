@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 
@@ -21,16 +21,18 @@ const App: React.FC = () => {
                         <div className="flex flex-col min-h-screen">
                             <Header />
                             <main className="flex-grow">
-                                <Routes>
-                                    {routes.map((route, index) => (
-                                        <Route
-                                            key={index}
-                                            path={route.path}
-                                            element={route.element}
-                                        />
-                                    ))}
-                                    <Route path="*" element={<Navigate to="/" replace />} />
-                                </Routes>
+                                <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+                                    <Routes>
+                                        {routes.map((route, index) => (
+                                            <Route
+                                                key={index}
+                                                path={route.path}
+                                                element={route.element}
+                                            />
+                                        ))}
+                                        <Route path="*" element={<Navigate to="/" replace />} />
+                                    </Routes>
+                                </Suspense>
                             </main>
                         </div>
                         <InstallPrompt />

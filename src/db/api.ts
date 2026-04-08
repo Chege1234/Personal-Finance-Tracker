@@ -8,7 +8,7 @@ export const getBudgetForMonth = async (month: number, year: number): Promise<Bu
 
     const { data, error } = await supabase
         .from('budgets')
-        .select('*')
+        .select('id, month, year, monthly_amount, currency, days_in_month, daily_budget, start_date, created_at')
         .eq('month', month)
         .eq('year', year)
         .eq('user_id', user.id)
@@ -148,7 +148,7 @@ export const getSpendingEntriesForDate = async (date: string): Promise<SpendingE
 
     const { data, error } = await supabase
         .from('spending_entries')
-        .select('*')
+        .select('id, date, amount, description, category, created_at')
         .eq('date', date)
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
@@ -166,7 +166,7 @@ export const getSpendingEntriesForMonth = async (month: number, year: number): P
 
     const { data, error } = await supabase
         .from('spending_entries')
-        .select('*')
+        .select('id, date, amount, description, category, created_at')
         .gte('date', startDate)
         .lte('date', endDate)
         .eq('user_id', user.id)
@@ -182,7 +182,7 @@ export const getSpendingEntriesForDateRange = async (startDate: string, endDate:
 
     const { data, error } = await supabase
         .from('spending_entries')
-        .select('*')
+        .select('id, date, amount, description, category, created_at')
         .gte('date', startDate)
         .lte('date', endDate)
         .eq('user_id', user.id)
@@ -252,7 +252,7 @@ export const getAllSpendingEntries = async (): Promise<SpendingEntry[]> => {
 
     const { data, error } = await supabase
         .from('spending_entries')
-        .select('*')
+        .select('id, date, amount, description, category, created_at')
         .eq('user_id', user.id)
         .order('date', { ascending: false })
         .limit(1000);
@@ -268,7 +268,7 @@ export const getAllCategories = async () => {
 
     const { data, error } = await supabase
         .from('categories')
-        .select('*')
+        .select('id, user_id, name, normalized_name, color, created_at, updated_at')
         .eq('user_id', user.id)
         .order('name', { ascending: true });
 
@@ -303,7 +303,7 @@ export const getCategoryByNormalizedName = async (normalizedName: string) => {
 
     const { data, error } = await supabase
         .from('categories')
-        .select('*')
+        .select('id, user_id, name, normalized_name, color, created_at, updated_at')
         .eq('user_id', user.id)
         .eq('normalized_name', normalizedName)
         .maybeSingle();

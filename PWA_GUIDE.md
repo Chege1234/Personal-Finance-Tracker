@@ -89,6 +89,12 @@ Once installed, the app works offline for:
 - **iOS**: Check all home screen pages
 - **Desktop**: Search in applications/start menu
 
+### Play Protect: "Unsafe app blocked"?
+Android 14+ has stricter security for newly installed apps. If you see this warning:
+1. Tap **"More details"** (the small arrow/text below the warning).
+2. Tap **"Install anyway"**.
+3. The app is safe; this warning appears because it's being installed directly from the browser rather than the Play Store.
+
 ### App Not Working Offline?
 - Make sure you've opened the app at least once while online
 - Check if service worker is registered (developer tools)
