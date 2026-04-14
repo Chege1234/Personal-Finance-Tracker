@@ -48,13 +48,14 @@ export default function SpendingForm({ date, onSuccess }: SpendingFormProps) {
             const category = await smartCategorize(sanitizedDescription);
             const entryDate = date || formatDate(new Date());
 
-            await createSpendingEntry(entryDate, amount, sanitizedDescription, category);
+            const amountValue = Number(data.amount);
+            await createSpendingEntry(entryDate, amountValue, sanitizedDescription, category);
 
-            logger.info('Spending entry created', { amount, description: sanitizedDescription, category });
+            logger.info('Spending entry created', { amount: amountValue, description: sanitizedDescription, category });
 
             toast({
                 title: 'Spending recorded',
-                description: `${sanitizedDescription} - ${amount.toFixed(2)}`,
+                description: `${sanitizedDescription} - ${amountValue.toFixed(2)}`,
             });
 
             form.reset();

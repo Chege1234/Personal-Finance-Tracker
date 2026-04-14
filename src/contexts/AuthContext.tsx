@@ -1,5 +1,6 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/db/supabase';
-import type { User, AuthError } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { logger } from '@/lib/logger';
 
 export interface Profile {
