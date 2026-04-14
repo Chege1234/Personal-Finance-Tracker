@@ -1,3 +1,11 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/db/supabase';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Users, Shield, User as UserIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { logger } from '@/lib/logger';
 
@@ -32,6 +40,7 @@ export default function AdminPanel() {
         }
     }, [profile, navigate]);
 
+    const fetchUsers = async () => {
         try {
             const { data, error } = await supabase
                 .from('profiles')
