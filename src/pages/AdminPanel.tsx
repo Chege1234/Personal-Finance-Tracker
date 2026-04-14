@@ -1,12 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/db/supabase';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Users, Shield, User as UserIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { logger } from '@/lib/logger';
 
 interface UserProfile {
     id: string;
@@ -25,14 +18,20 @@ export default function AdminPanel() {
     useEffect(() => {
         // Check if user is admin
         if (profile && profile.role !== 'admin') {
+            logger.security('Non-admin user attempted to access Admin Panel', { 
+                userId: profile.id, 
+                role: profile.role 
+            });
             navigate('/');
             return;
         }
 
-        fetchUsers();
+        if (profile && profile.role === 'admin') {
+            logger.info('Admin accessed Admin Panel', { userId: profile.id });
+            fetchUsers();
+        }
     }, [profile, navigate]);
 
-    const fetchUsers = async () => {
         try {
             const { data, error } = await supabase
                 .from('profiles')
@@ -42,7 +41,7 @@ export default function AdminPanel() {
             if (error) throw error;
             setUsers(data || []);
         } catch (error) {
-            console.error('Error fetching users:', error);
+            logger.error('Error fetching users in Admin Panel', error);
         } finally {
             setLoading(false);
         }
