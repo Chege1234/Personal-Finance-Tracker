@@ -34,6 +34,7 @@ To fully secure the application, the following settings should be configured in 
 2. **Secure Passwords**: 
    - Set minimum password length (recommended: 8+).
    - Require at least one digit and one special character if possible.
+   - **Enforce Leaked Password Protection**: In the Supabase Dashboard, enable the "Leaked Password Protection" feature to prevent users from using compromised passwords.
 3. **Session Management**:
    - Set "JWT Expiry" to a reasonable time (e.g., 3600 seconds / 1 hour).
    - Enable "Refresh Token Rotation" to prevent token reuse.
