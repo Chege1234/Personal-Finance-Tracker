@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/db/supabase';
 import type { User } from '@supabase/supabase-js';
 import { logger } from '@/lib/logger';
@@ -44,9 +44,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = React.useState<User | null>(null);
-    const [profile, setProfile] = React.useState<Profile | null>(null);
-    const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = useState<User | null>(null);
+    const [profile, setProfile] = useState<Profile | null>(null);
+    const [loading, setLoading] = useState(true);
 
     const refreshProfile = async () => {
         if (!user) {
@@ -58,21 +58,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile(profileData);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         let isMounted = true;
 
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (!isMounted) return;
-            
-            setUser(session?.user ?? null);
-            if (session?.user) {
-                logger.info('User session restored', { userId: session.user.id });
-                getProfile(session.user.id).then(profile => {
-                    if (isMounted) setProfile(profile);
-                });
+        // Safety timeout to ensure loading state is cleared even if Supabase hangs
+        const timeoutId = setTimeout(() => {
+            if (isMounted && loading) {
+                logger.warn('Auth initialization timed out after 5s');
+                setLoading(false);
             }
-            setLoading(false);
-        });
+        }, 5000);
+
+        const initAuth = async () => {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                
+                if (error) {
+                    logger.error('Failed to get auth session', error);
+                    if (isMounted) setLoading(false);
+                    return;
+                }
+
+                if (!isMounted) return;
+                
+                setUser(session?.user ?? null);
+                if (session?.user) {
+                    logger.info('User session restored', { userId: session.user.id });
+                    const profileData = await getProfile(session.user.id);
+                    if (isMounted) setProfile(profileData);
+                }
+            } catch (err) {
+                logger.error('Unexpected error during auth init', err);
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
+                    clearTimeout(timeoutId);
+                }
+            }
+        };
+
+        initAuth();
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
             if (!isMounted) return;
@@ -95,6 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return () => {
             isMounted = false;
             subscription.unsubscribe();
+            clearTimeout(timeoutId);
         };
     }, []);
 
@@ -170,7 +196,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 }
 
 export function useAuth() {
-    const context = React.useContext(AuthContext);
+    const context = useContext(AuthContext);
     if (context === undefined) {
         throw new Error('useAuth must be used within an AuthProvider');
     }
