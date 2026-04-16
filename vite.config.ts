@@ -77,4 +77,20 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
     },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('react')) return 'vendor-react';
+                        if (id.includes('@supabase')) return 'vendor-supabase';
+                        if (id.includes('lucide-react') || id.includes('radix-ui') || id.includes('clsx') || id.includes('tailwind-merge')) return 'vendor-ui';
+                        if (id.includes('@tanstack')) return 'vendor-query';
+                        return 'vendor';
+                    }
+                },
+            },
+        },
+        chunkSizeWarningLimit: 1000,
+    },
 });

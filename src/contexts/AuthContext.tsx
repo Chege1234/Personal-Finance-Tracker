@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { supabase } from '@/db/supabase';
 import type { User } from '@supabase/supabase-js';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export interface Profile {
     id: string;
@@ -13,7 +14,7 @@ export interface Profile {
 export async function getProfile(userId: string): Promise<Profile | null> {
     const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        .select('id, email, role, created_at, updated_at')
         .eq('id', userId)
         .maybeSingle();
 
@@ -38,40 +39,42 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = React.useState<User | null>(null);
-    const [profile, setProfile] = React.useState<Profile | null>(null);
-    const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = useState<User | null>(null);
+    const queryClient = useQueryClient();
+
+    // Use query for profile - this provides caching and deduplication
+    const { data: profile, isLoading: profileLoading, refetch } = useQuery({
+        queryKey: ['profile', user?.id],
+        queryFn: () => (user ? getProfile(user.id) : Promise.resolve(null)),
+        enabled: !!user,
+        staleTime: 1000 * 60 * 15, // Cache profile for 15 minutes
+    });
 
     const refreshProfile = async () => {
-        if (!user) {
-            setProfile(null);
-            return;
-        }
-
-        const profileData = await getProfile(user.id);
-        setProfile(profileData);
+        await refetch();
     };
 
-    React.useEffect(() => {
+    const [authLoading, setAuthLoading] = useState(true);
+
+    useEffect(() => {
+        // Initial session check
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null);
-            if (session?.user) {
-                getProfile(session.user.id).then(setProfile);
-            }
-            setLoading(false);
+            setAuthLoading(false);
         });
 
+        // Listen for changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setUser(session?.user ?? null);
-            if (session?.user) {
-                getProfile(session.user.id).then(setProfile);
-            } else {
-                setProfile(null);
+            if (!session) {
+                queryClient.setQueryData(['profile', undefined], null);
             }
         });
 
         return () => subscription.unsubscribe();
-    }, []);
+    }, [queryClient]);
+
+    const loading = authLoading || (!!user && profileLoading);
 
     const signInWithEmail = async (email: string, password: string) => {
         try {
@@ -120,11 +123,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const signOut = async () => {
         await supabase.auth.signOut();
         setUser(null);
-        setProfile(null);
+        queryClient.setQueryData(['profile', user?.id], null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, profile, loading, signInWithEmail, signInWithGoogle, signUpWithEmail, signOut, refreshProfile }}>
+        <AuthContext.Provider value={{ user, profile: profile || null, loading, signInWithEmail, signInWithGoogle, signUpWithEmail, signOut, refreshProfile }}>
             {children}
         </AuthContext.Provider>
     );
