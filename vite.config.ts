@@ -18,7 +18,7 @@ export default defineConfig({
             },
         }),
         VitePWA({
-            registerType: 'prompt',
+            registerType: 'autoUpdate',
             injectRegister: 'auto',
             manifest: {
                 id: '/?source=pwa',

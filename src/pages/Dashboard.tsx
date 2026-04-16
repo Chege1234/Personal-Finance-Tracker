@@ -15,8 +15,6 @@ import { getCurrentMonth, getCurrentYear, formatDate, getDaysInMonth, formatCurr
 import { useToast } from '@/hooks/use-toast';
 import type { Budget, SpendingEntry, DailyBalance, Currency } from '@/types/index';
 import { Plus, Settings } from 'lucide-react';
-import { logger } from '@/lib/logger';
-import { validateCurrency } from '@/lib/sanitization';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -52,9 +50,10 @@ export default function Dashboard() {
             setMonthlyEntries(monthEntries);
             setTodayEntries(todayData);
 
+            // Calculate daily balance
             calculateDailyBalance(budgetData, monthEntries, todayData);
         } catch (error) {
-            logger.error('Error loading dashboard data', error);
+            console.error('Error loading data:', error);
         } finally {
             setIsLoading(false);
         }
@@ -107,9 +106,8 @@ export default function Dashboard() {
     const handleUpdateBudget = async () => {
         if (!budget) return;
 
-        const amount = validateCurrency(newBudgetAmount);
-        if (amount <= 0) {
-            logger.warn('Invalid budget update attempt', { amount: newBudgetAmount });
+        const amount = Number(newBudgetAmount);
+        if (isNaN(amount) || amount <= 0) {
             toast({
                 title: 'Invalid Amount',
                 description: 'Please enter a valid budget amount.',
@@ -122,8 +120,6 @@ export default function Dashboard() {
         try {
             await updateBudget(budget.id, amount, budget.days_in_month);
 
-            logger.security('Budget updated', { oldAmount: budget.monthly_amount, newAmount: amount });
-
             toast({
                 title: 'Budget Updated',
                 description: `Your monthly budget has been updated to ${formatCurrency(amount, budget.currency as Currency)}.`,
@@ -132,7 +128,7 @@ export default function Dashboard() {
             setIsEditDialogOpen(false);
             await loadData();
         } catch (error) {
-            logger.error('Error updating budget', error);
+            console.error('Error updating budget:', error);
             toast({
                 title: 'Error',
                 description: 'Failed to update budget. Please try again.',

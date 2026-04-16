@@ -1,6 +1,5 @@
 import { supabase } from './supabase';
 import type { Budget, SpendingEntry } from '@/types/index';
-import { logger } from '@/lib/logger';
 
 // Budget operations
 export const getBudgetForMonth = async (month: number, year: number): Promise<Budget | null> => {
@@ -33,17 +32,28 @@ export const createBudget = async (
         console.log('Auth check:', { user: user?.id, authError });
 
         if (authError) {
-            logger.error('Auth error during budget creation', authError);
+            console.error('Auth error:', authError);
             throw new Error(`Authentication error: ${authError.message}`);
         }
 
         if (!user) {
-            logger.security('Unauthenticated budget creation attempt');
+            console.error('No user found in session');
             throw new Error('Not authenticated. Please log in again.');
         }
 
         const dailyBudget = monthlyAmount / daysInMonth;
         const startDate = formatDate(new Date());
+
+        console.log('Creating budget with data:', {
+            month,
+            year,
+            monthly_amount: monthlyAmount,
+            currency,
+            days_in_month: daysInMonth,
+            daily_budget: dailyBudget,
+            start_date: startDate,
+            user_id: user.id,
+        });
 
         const { data, error } = await supabase
             .from('budgets')
@@ -61,13 +71,14 @@ export const createBudget = async (
             .single();
 
         if (error) {
-            logger.error('Budget creation error', error);
+            console.error('Budget creation error:', error);
             throw new Error(`Failed to create budget: ${error.message}`);
         }
 
+        console.log('Budget created successfully:', data);
         return data;
     } catch (error) {
-        logger.error('createBudget exception', error);
+        console.error('createBudget exception:', error);
         throw error;
     }
 };
@@ -110,13 +121,14 @@ export const updateBudget = async (
             .single();
 
         if (error) {
-            logger.error('Budget update error', error);
+            console.error('Budget update error:', error);
             throw new Error(`Failed to update budget: ${error.message}`);
         }
 
+        console.log('Budget updated successfully:', data);
         return data;
     } catch (error) {
-        logger.error('updateBudget exception', error);
+        console.error('updateBudget exception:', error);
         throw error;
     }
 };

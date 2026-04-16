@@ -12,8 +12,6 @@ import { formatDate } from '@/lib/finance-utils';
 import { smartCategorize } from '@/lib/smart-categorization';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
-import { sanitizeInput } from '@/lib/sanitization';
-import { logger } from '@/lib/logger';
 
 const spendingSchema = z.object({
     amount: z.string().min(1, 'Amount is required').refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
@@ -44,24 +42,20 @@ export default function SpendingForm({ date, onSuccess }: SpendingFormProps) {
     const onSubmit = async (data: SpendingFormData) => {
         setIsSubmitting(true);
         try {
-            const sanitizedDescription = sanitizeInput(data.description);
-            const category = await smartCategorize(sanitizedDescription);
+            const amount = Number(data.amount);
+            const category = await smartCategorize(data.description);
             const entryDate = date || formatDate(new Date());
 
-            const amountValue = Number(data.amount);
-            await createSpendingEntry(entryDate, amountValue, sanitizedDescription, category);
-
-            logger.info('Spending entry created', { amount: amountValue, description: sanitizedDescription, category });
+            await createSpendingEntry(entryDate, amount, data.description, category);
 
             toast({
                 title: 'Spending recorded',
-                description: `${sanitizedDescription} - ${amountValue.toFixed(2)}`,
+                description: `${data.description} - ${amount.toFixed(2)}`,
             });
 
             form.reset();
             onSuccess?.();
         } catch (error) {
-            logger.error('Failed to record spending', error);
             toast({
                 title: 'Error',
                 description: 'Failed to record spending. Please try again.',
