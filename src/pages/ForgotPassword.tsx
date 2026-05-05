@@ -63,18 +63,16 @@ export default function ForgotPassword() {
 
     if (emailSent) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 p-4">
-                <Card className="w-full max-w-md shadow-2xl border-2 border-primary/20">
-                    <CardHeader className="space-y-4 text-center bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div className="app-page flex items-center justify-center p-4">
+                <Card className="surface-panel w-full max-w-md">
+                    <CardHeader className="space-y-3 text-center">
                         <div className="flex justify-center">
-                            <div className="p-4 bg-gradient-to-r from-primary to-secondary rounded-full">
-                                <CheckCircle className="h-12 w-12 text-white" />
+                            <div className="rounded-xl border border-border bg-muted p-3">
+                                <CheckCircle className="h-6 w-6 text-foreground" />
                             </div>
                         </div>
-                        <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                            Check Your Email
-                        </CardTitle>
-                        <CardDescription className="text-base">
+                        <CardTitle className="text-2xl font-semibold tracking-tight">Check your email</CardTitle>
+                        <CardDescription>
                             We've sent password reset instructions to your email address
                         </CardDescription>
                     </CardHeader>
@@ -93,7 +91,7 @@ export default function ForgotPassword() {
                             <div className="text-center">
                                 <Link
                                     to="/login"
-                                    className="text-sm font-semibold text-primary hover:text-secondary transition-colors"
+                                    className="text-sm font-medium text-foreground underline underline-offset-4"
                                 >
                                     Back to Login
                                 </Link>
@@ -106,18 +104,16 @@ export default function ForgotPassword() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 p-4">
-            <Card className="w-full max-w-md shadow-2xl border-2 border-primary/20">
-                <CardHeader className="space-y-4 text-center bg-gradient-to-r from-primary/10 to-secondary/10">
+        <div className="app-page flex items-center justify-center p-4">
+            <Card className="surface-panel w-full max-w-md">
+                <CardHeader className="space-y-3 text-center">
                     <div className="flex justify-center">
-                        <div className="p-4 bg-gradient-to-r from-primary to-secondary rounded-full">
-                            <Wallet className="h-12 w-12 text-white" />
+                        <div className="rounded-xl border border-border bg-muted p-3">
+                            <Wallet className="h-6 w-6 text-foreground" />
                         </div>
                     </div>
-                    <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Reset Password
-                    </CardTitle>
-                    <CardDescription className="text-base">
+                    <CardTitle className="text-2xl font-semibold tracking-tight">Reset password</CardTitle>
+                    <CardDescription>
                         Enter your email to receive password reset instructions
                     </CardDescription>
                 </CardHeader>
@@ -144,7 +140,7 @@ export default function ForgotPassword() {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md"
+                                className="w-full"
                                 disabled={isLoading}
                             >
                                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -158,7 +154,7 @@ export default function ForgotPassword() {
                             Remember your password?{' '}
                             <Link
                                 to="/login"
-                                className="font-semibold text-primary hover:text-secondary transition-colors"
+                                className="font-medium text-foreground underline underline-offset-4"
                             >
                                 Sign in
                             </Link>

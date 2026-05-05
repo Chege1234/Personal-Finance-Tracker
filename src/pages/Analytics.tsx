@@ -91,7 +91,7 @@ export default function Analytics() {
         name: item.name,
         value: item.value,
         percentage: (item.value / totalSpent) * 100,
-        icon: CATEGORY_ICONS[item.name] || '📌',
+        icon: CATEGORY_ICONS[item.name] || 'Other',
         color: item.color,
     }));
 
@@ -177,8 +177,8 @@ export default function Analytics() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-background">
-                <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 max-w-7xl">
+            <div className="app-page">
+                <div className="app-content py-6 md:py-8">
                     <Skeleton className="h-12 w-64 mb-8 bg-muted" />
                     <div className="grid gap-6 md:grid-cols-3 mb-8">
                         <Skeleton className="h-32 bg-muted" />
@@ -192,8 +192,8 @@ export default function Analytics() {
     }
 
     return (
-        <div className="min-h-screen bg-background">
-            <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 max-w-7xl space-y-8">
+        <div className="app-page">
+            <div className="app-content space-y-8 py-6 md:py-8">
                 {/* Header with Navigation */}
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-4">
@@ -206,7 +206,7 @@ export default function Analytics() {
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-primary">Analytics</h1>
+                            <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Analytics</h1>
                             <p className="text-sm text-muted-foreground mt-1">Understand your spending patterns</p>
                         </div>
                     </div>
@@ -262,7 +262,7 @@ export default function Analytics() {
                 </div>
 
                 {entries.length === 0 ? (
-                    <Card className="card-shadow border-border">
+                    <Card className="surface-panel">
                         <CardContent className="p-12 text-center">
                             <Calendar className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                             <h3 className="text-lg font-semibold text-foreground mb-2">No spending data yet</h3>
@@ -275,13 +275,13 @@ export default function Analytics() {
                     <>
                         {/* Spending Overview Summary */}
                         <div className="grid gap-6 md:grid-cols-3">
-                            <Card className="card-shadow border-border">
+                            <Card className="surface-panel">
                                 <CardContent className="p-6">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="p-2 rounded-lg bg-primary/10">
                                             <DollarSign className="h-5 w-5 text-primary" />
                                         </div>
-                                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                        <p className="text-sm font-medium text-muted-foreground">
                                             Total Spent
                                         </p>
                                     </div>
@@ -294,13 +294,13 @@ export default function Analytics() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="card-shadow border-border">
+                            <Card className="surface-panel">
                                 <CardContent className="p-6">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="p-2 rounded-lg bg-accent/10">
-                                            <span className="text-xl">{largestCategory?.icon}</span>
+                                            <span className="text-xs font-semibold text-muted-foreground">Top</span>
                                         </div>
-                                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                        <p className="text-sm font-medium text-muted-foreground">
                                             Top Category
                                         </p>
                                     </div>
@@ -313,13 +313,13 @@ export default function Analytics() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="card-shadow border-border">
+                            <Card className="surface-panel">
                                 <CardContent className="p-6">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="p-2 rounded-lg bg-success/10">
                                             <TrendingUp className="h-5 w-5 text-success" />
                                         </div>
-                                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                        <p className="text-sm font-medium text-muted-foreground">
                                             Daily Average
                                         </p>
                                     </div>
@@ -334,7 +334,7 @@ export default function Analytics() {
                         </div>
 
                         {/* Spending by Category Pie Chart */}
-                        <Card className="card-shadow border-border">
+                        <Card className="surface-panel">
                             <CardContent className="p-6">
                                 <div className="space-y-6">
                                     {/* Premium Donut Chart */}
@@ -349,7 +349,7 @@ export default function Analytics() {
 
                         {/* Spending Over Time Line Chart */}
                         {lineChartData.length > 1 && (
-                            <Card className="card-shadow border-border">
+                            <Card className="surface-panel">
                                 <CardContent className="p-6">
                                     <div className="space-y-6">
                                         <div>
@@ -405,7 +405,7 @@ export default function Analytics() {
                         )}
 
                         {/* AI Insights Section */}
-                        <Card className="card-shadow border-border">
+                        <Card className="surface-panel">
                             <CardContent className="p-6">
                                 <div className="space-y-6">
                                     <div className="flex items-center justify-between">
@@ -433,7 +433,7 @@ export default function Analytics() {
                                     {!showFullReport ? (
                                         <div className="space-y-3">
                                             {getAutomaticInsights().map((insight, index) => (
-                                                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
+                                                <div key={index} className="flex items-start gap-3 rounded-lg border border-border/60 bg-muted/30 p-4">
                                                     <div className="p-1.5 rounded-full bg-accent/10 mt-0.5">
                                                         <div className="w-2 h-2 rounded-full bg-accent" />
                                                     </div>
@@ -536,7 +536,7 @@ export default function Analytics() {
                         </Card>
 
                         {/* Transaction History */}
-                        <Card className="card-shadow border-border">
+                        <Card className="surface-panel">
                             <CardContent className="p-6">
                                 <div className="space-y-4">
                                     <div>

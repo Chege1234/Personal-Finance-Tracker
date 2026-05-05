@@ -124,8 +124,8 @@ export default function History() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-background">
-                <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 max-w-7xl">
+            <div className="app-page">
+                <div className="app-content py-6 md:py-8">
                     <Skeleton className="h-12 w-64 mb-8 bg-muted" />
                     <Skeleton className="h-96 bg-muted" />
                 </div>
@@ -134,8 +134,8 @@ export default function History() {
     }
 
     return (
-        <div className="min-h-screen bg-background">
-            <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 max-w-7xl space-y-8">
+        <div className="app-page">
+            <div className="app-content space-y-8 py-6 md:py-8">
                 {/* Header with Navigation */}
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-4">
@@ -148,7 +148,7 @@ export default function History() {
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-primary">Transaction History</h1>
+                            <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Transaction History</h1>
                             <p className="text-sm text-muted-foreground mt-1">View and manage your spending</p>
                         </div>
                     </div>
@@ -176,7 +176,7 @@ export default function History() {
                 </div>
 
                 {/* Filters */}
-                <Card className="card-shadow border-border">
+                <Card className="surface-panel">
                     <CardContent className="p-6">
                         <div className="flex flex-col md:flex-row gap-4">
                             {/* Month Selector */}
@@ -238,7 +238,7 @@ export default function History() {
 
                 {/* Transactions */}
                 {filteredEntries.length === 0 ? (
-                    <Card className="card-shadow border-border">
+                    <Card className="surface-panel">
                         <CardContent className="p-12 text-center">
                             <Calendar className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                             <h3 className="text-lg font-semibold text-foreground mb-2">No transactions found</h3>
@@ -250,7 +250,7 @@ export default function History() {
                         </CardContent>
                     </Card>
                 ) : (
-                    <Card className="card-shadow border-border">
+                    <Card className="surface-panel">
                         <CardContent className="p-6">
                             <div className="space-y-6">
                                 <div className="flex items-center justify-between">
@@ -285,7 +285,7 @@ export default function History() {
                                             {/* Date Header - Clickable */}
                                             <button
                                                 onClick={() => toggleDate(date)}
-                                                className="w-full flex items-center justify-between pb-2 border-b-2 border-border hover:bg-accent/5 transition-colors rounded-t-lg px-2 -mx-2"
+                                                className="flex w-full items-center justify-between rounded-lg border border-transparent px-2 py-1.5 transition-colors hover:border-border/70 hover:bg-muted/40"
                                             >
                                                 <div className="flex items-center gap-2">
                                                     {isExpanded ? (
@@ -310,7 +310,7 @@ export default function History() {
                                                     {dateEntries.map((entry) => (
                                                         <div
                                                             key={entry.id}
-                                                            className="flex items-center justify-between py-3 border-b border-border last:border-0 hover:bg-muted/30 transition-colors"
+                                                            className="flex items-center justify-between border-b border-border/70 py-3 transition-colors hover:bg-muted/30 last:border-0"
                                                         >
                                                             <div className="flex items-center gap-3 flex-1">
                                                                 <span className="text-2xl">

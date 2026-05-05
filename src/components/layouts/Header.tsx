@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate, useLocation, Link } from 'react-router';
-import { LogOut, User, Shield } from 'lucide-react';
+import { BarChart3, History, Home, LogOut, Shield, User } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
     DropdownMenu,
@@ -27,26 +27,49 @@ export default function Header() {
         navigate('/login');
     };
 
+    const isActive = (path: string) => location.pathname === path;
+
     return (
-        <header className="w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4">
-                <Link to="/" className="flex items-center gap-3">
+        <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-background/90 backdrop-blur">
+            <div className="app-content flex h-16 items-center justify-between gap-4 px-4">
+                <Link to="/" className="flex items-center gap-3 shrink-0">
                     <img
                         src="https://miaoda-conversation-file.s3cdn.medo.dev/user-9fxfm5xqp14w/conv-9fxfnx2x3q4g/20260211/file-9k0hknwuspvk.png"
                         alt="Personal Finance Tracker Logo"
-                        className="h-12 w-auto object-contain"
+                        className="h-9 w-auto object-contain"
                     />
-                    <span className="text-xl font-bold text-foreground">
+                    <span className="text-lg font-semibold tracking-tight text-foreground">
                         Finance Tracker
                     </span>
                 </Link>
 
                 {user && (
                     <div className="flex items-center gap-2">
+                        <nav className="hidden items-center gap-1 rounded-lg border border-border/70 bg-muted/40 p-1 md:flex">
+                            <Link to="/">
+                                <Button variant={isActive('/') ? 'default' : 'ghost'} size="sm" className="gap-2">
+                                    <Home className="h-4 w-4" />
+                                    Home
+                                </Button>
+                            </Link>
+                            <Link to="/history">
+                                <Button variant={isActive('/history') ? 'default' : 'ghost'} size="sm" className="gap-2">
+                                    <History className="h-4 w-4" />
+                                    History
+                                </Button>
+                            </Link>
+                            <Link to="/analytics">
+                                <Button variant={isActive('/analytics') ? 'default' : 'ghost'} size="sm" className="gap-2">
+                                    <BarChart3 className="h-4 w-4" />
+                                    Analytics
+                                </Button>
+                            </Link>
+                        </nav>
+
                         <ThemeToggle />
                         {profile?.role === 'admin' && (
                             <Link to="/admin">
-                                <Button variant="outline" size="sm" className="gap-2">
+                                <Button variant="outline" size="sm" className="gap-2 border-border/70">
                                     <Shield className="h-4 w-4" />
                                     <span className="hidden md:inline">Admin</span>
                                 </Button>
@@ -54,7 +77,7 @@ export default function Header() {
                         )}
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="flex items-center gap-2">
+                                <Button variant="ghost" className="flex items-center gap-2 border border-transparent hover:border-border/70">
                                     <User className="h-4 w-4" />
                                     <span className="hidden md:inline">{profile?.email || 'User'}</span>
                                 </Button>

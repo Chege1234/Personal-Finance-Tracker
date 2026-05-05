@@ -75,20 +75,28 @@ export default function Signup() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 p-4">
-            <Card className="w-full max-w-md shadow-2xl border-2 border-primary/20">
-                <CardHeader className="space-y-4 text-center bg-gradient-to-r from-primary/10 to-secondary/10">
+        <div className="app-page px-4 py-10">
+            <div className="mx-auto grid w-full max-w-[1380px] gap-8 lg:grid-cols-[1.2fr_0.9fr]">
+                <div className="hidden rounded-2xl border border-border/70 bg-card/70 p-10 lg:flex lg:flex-col lg:justify-between">
+                    <div className="space-y-3">
+                        <p className="text-sm font-medium text-muted-foreground">Personal Finance Tracker</p>
+                        <h1 className="text-4xl font-semibold tracking-tight text-foreground">Start with a clear monthly plan.</h1>
+                        <p className="text-sm leading-6 text-muted-foreground">
+                            Set your budget once, then track each transaction in seconds from phone or desktop.
+                        </p>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Designed to keep budgeting practical and stress-free.</p>
+                </div>
+
+                <Card className="surface-panel w-full">
+                    <CardHeader className="space-y-3 text-center">
                     <div className="flex justify-center">
-                        <div className="p-4 bg-gradient-to-r from-primary to-secondary rounded-full">
-                            <Wallet className="h-12 w-12 text-white" />
+                        <div className="rounded-xl border border-border bg-muted p-3">
+                            <Wallet className="h-6 w-6 text-foreground" />
                         </div>
                     </div>
-                    <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Create Account
-                    </CardTitle>
-                    <CardDescription className="text-base">
-                        Start tracking your finances today
-                    </CardDescription>
+                    <CardTitle className="text-2xl font-semibold tracking-tight">Create your account</CardTitle>
+                    <CardDescription>Set up your workspace and start tracking today</CardDescription>
                 </CardHeader>
                 <CardContent className="pt-6">
                     <Form {...form}>
@@ -149,7 +157,7 @@ export default function Signup() {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md"
+                                className="w-full"
                                 disabled={isLoading}
                             >
                                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -163,14 +171,15 @@ export default function Signup() {
                             Already have an account?{' '}
                             <Link
                                 to="/login"
-                                className="font-semibold text-primary hover:text-secondary transition-colors"
+                                className="font-medium text-foreground underline underline-offset-4"
                             >
                                 Sign in
                             </Link>
                         </p>
                     </div>
                 </CardContent>
-            </Card>
+                </Card>
+            </div>
         </div>
     );
 }

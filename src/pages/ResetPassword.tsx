@@ -68,18 +68,16 @@ export default function ResetPassword() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 p-4">
-            <Card className="w-full max-w-md shadow-2xl border-2 border-primary/20">
-                <CardHeader className="space-y-4 text-center bg-gradient-to-r from-primary/10 to-secondary/10">
+        <div className="app-page flex items-center justify-center p-4">
+            <Card className="surface-panel w-full max-w-md">
+                <CardHeader className="space-y-3 text-center">
                     <div className="flex justify-center">
-                        <div className="p-4 bg-gradient-to-r from-primary to-secondary rounded-full">
-                            <Wallet className="h-12 w-12 text-white" />
+                        <div className="rounded-xl border border-border bg-muted p-3">
+                            <Wallet className="h-6 w-6 text-foreground" />
                         </div>
                     </div>
-                    <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Create New Password
-                    </CardTitle>
-                    <CardDescription className="text-base">
+                    <CardTitle className="text-2xl font-semibold tracking-tight">Create new password</CardTitle>
+                    <CardDescription>
                         Enter your new password below
                     </CardDescription>
                 </CardHeader>
@@ -124,7 +122,7 @@ export default function ResetPassword() {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md"
+                                className="w-full"
                                 disabled={isLoading}
                             >
                                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

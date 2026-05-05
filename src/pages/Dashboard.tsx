@@ -14,7 +14,7 @@ import { getBudgetForMonth, getSpendingEntriesForMonth, getSpendingEntriesForDat
 import { getCurrentMonth, getCurrentYear, formatDate, getDaysInMonth, formatCurrency } from '@/lib/finance-utils';
 import { useToast } from '@/hooks/use-toast';
 import type { Budget, SpendingEntry, DailyBalance, Currency } from '@/types/index';
-import { Plus, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -145,7 +145,7 @@ export default function Dashboard() {
 
     if (isLoading) {
         return (
-            <div className="container mx-auto p-4 md:p-6 space-y-6">
+            <div className="app-content space-y-6 py-6 md:py-8">
                 <Skeleton className="h-10 w-64 bg-muted" />
                 <div className="grid gap-6 md:grid-cols-2">
                     <Skeleton className="h-64 bg-muted" />
@@ -164,12 +164,11 @@ export default function Dashboard() {
     const remaining = budget.monthly_amount - totalSpent;
 
     return (
-        <div className="min-h-screen bg-background">
-            <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 max-w-7xl">
-                {/* Header Section */}
+        <div className="app-page">
+            <div className="app-content py-6 md:py-8">
                 <div className="mb-8">
-                    <div className="flex items-center justify-between mb-2">
-                        <h1 className="text-2xl md:text-3xl font-bold text-primary">
+                    <div className="mb-2 flex items-center justify-between">
+                        <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
                             {new Date().toLocaleDateString('en-US', {
                                 month: 'long',
                                 year: 'numeric',
@@ -178,24 +177,24 @@ export default function Dashboard() {
                         <div className="flex gap-2">
                             <Button
                                 onClick={handleEditBudget}
-                                variant="outline"
+                                variant="ghost"
                                 size="sm"
-                                className="gap-2"
+                                className="gap-2 border border-border/70"
                             >
                                 <Settings className="h-4 w-4" />
                                 <span className="hidden sm:inline">Edit Budget</span>
                             </Button>
                             <Button
                                 onClick={() => navigate('/analytics')}
-                                variant="outline"
+                                variant="default"
                                 className="text-sm font-medium"
                             >
                                 Analytics
                             </Button>
                             <Button
                                 onClick={() => navigate('/history')}
-                                variant="outline"
-                                className="text-sm font-medium"
+                                variant="ghost"
+                                className="border border-border/70 text-sm font-medium"
                             >
                                 History
                             </Button>
@@ -210,17 +209,14 @@ export default function Dashboard() {
                     </p>
                 </div>
 
-                {/* 1. Today's Allowance - Most Prominent */}
                 <div className="mb-8">
                     <DailyBalanceCard balance={dailyBalance} currency={budget.currency as Currency} />
                 </div>
 
-                {/* 2. Record Spending Form */}
                 <div className="mb-8">
                     <SpendingForm onSuccess={loadData} />
                 </div>
 
-                {/* 3. Today's Spending List */}
                 <div className="mb-8">
                     <SpendingList
                         entries={todayEntries}
@@ -230,12 +226,11 @@ export default function Dashboard() {
                     />
                 </div>
 
-                {/* 4. Remaining Budget */}
                 <div className="mb-8">
-                    <Card className="card-shadow-lg border-border">
+                    <Card className="surface-panel">
                         <CardContent className="p-6 md:p-8">
                             <div className="space-y-2">
-                                <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                <p className="text-sm font-medium text-muted-foreground">
                                     Remaining Budget
                                 </p>
                                 <div className="flex items-baseline gap-2">
@@ -265,12 +260,10 @@ export default function Dashboard() {
                     </Card>
                 </div>
 
-                {/* 5. Monthly Overview */}
                 <div className="mb-8">
                     <BudgetCard budget={budget} totalSpent={totalSpent} remaining={remaining} />
                 </div>
 
-                {/* 6. Spending History */}
                 <div>
                     <SpendingList
                         entries={monthlyEntries}
@@ -283,7 +276,6 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            {/* Edit Budget Dialog */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
                 <DialogContent>
                     <DialogHeader>

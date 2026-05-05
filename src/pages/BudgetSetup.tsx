@@ -74,17 +74,17 @@ export default function BudgetSetup() {
     };
 
     return (
-        <div className="container mx-auto p-4 md:p-6 max-w-2xl">
+        <div className="app-content max-w-[1200px] p-4 md:p-8">
             <div className="space-y-6">
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Set Monthly Budget</h1>
+                    <h1 className="text-3xl font-semibold tracking-tight">Set your monthly budget</h1>
                     <p className="text-muted-foreground mt-2">
                         Configure your budget for {new Date(currentYear, currentMonth - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                     </p>
                 </div>
 
-                <Card className="shadow-lg border-2 border-primary/20">
-                    <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
+                <Card className="surface-panel">
+                    <CardHeader>
                         <CardTitle>Budget Configuration</CardTitle>
                         <CardDescription>
                             This month has {daysInMonth} days. Your budget will be divided equally across all days.
@@ -140,9 +140,9 @@ export default function BudgetSetup() {
                                 />
 
                                 {dailyBudget > 0 && (
-                                    <div className="p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border-2 border-primary/20 shadow-sm">
+                                    <div className="rounded-lg border border-border/70 bg-muted/40 p-4">
                                         <p className="text-sm text-muted-foreground">Daily Budget</p>
-                                        <p className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                        <p className="text-3xl font-semibold tracking-tight">
                                             {dailyBudget.toFixed(2)} {form.watch('currency')}
                                         </p>
                                         <p className="text-xs text-muted-foreground mt-1">
@@ -151,7 +151,7 @@ export default function BudgetSetup() {
                                     </div>
                                 )}
 
-                                <Button type="submit" className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md" disabled={isSubmitting}>
+                                <Button type="submit" className="w-full" disabled={isSubmitting}>
                                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                     Set Budget
                                 </Button>
@@ -160,8 +160,8 @@ export default function BudgetSetup() {
                     </CardContent>
                 </Card>
 
-                <Card className="border-2 border-accent/20 shadow-lg">
-                    <CardHeader className="bg-gradient-to-r from-accent/10 to-primary/10">
+                <Card className="surface-panel">
+                    <CardHeader>
                         <CardTitle className="text-lg">How It Works</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 text-sm pt-4">
