@@ -1,4 +1,4 @@
-# Welcome to Your Miaoda Project
+# Welcome to the Project
 
 ## Project Info
 
