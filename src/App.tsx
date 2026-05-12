@@ -20,7 +20,7 @@ const App: React.FC = () => {
                         <IntersectObserver />
                         <div className="flex flex-col min-h-screen">
                             <Header />
-                            <main className="flex-grow">
+                            <main className="flex-grow pb-nav-safe md:pb-0">
                                 <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
                                     <Routes>
                                         {routes.map((route, index) => (

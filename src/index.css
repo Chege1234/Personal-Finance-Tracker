@@ -3,135 +3,160 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
-All colors MUST be HSL.
+/*
+  Design System — Personal Finance Tracker
+  Philosophy: Warm, organic, premium. Feels human, not machine-generated.
+  All colors in HSL. Light mode = warm off-white. Dark mode = deep slate-indigo.
 */
 
 @layer base {
     :root {
-        --radius: 0.75rem;
-        --background: 220 30% 96%;
-        --foreground: 224 29% 17%;
-        --card: 0 0% 99%;
-        --card-foreground: 220 30% 15%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 220 30% 15%;
-        --primary: 224 42% 31%;
-        --primary-foreground: 0 0% 100%;
-        --secondary: 216 26% 40%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 220 22% 92%;
-        --muted-foreground: 220 12% 36%;
-        --accent: 161 65% 38%;
-        --accent-foreground: 0 0% 100%;
-        --destructive: 0 70% 50%;
-        --destructive-foreground: 0 0% 100%;
-        --border: 220 15% 88%;
-        --input: 220 15% 88%;
-        --ring: 160 60% 45%;
-        --success: 160 60% 45%;
-        --warning: 38 92% 50%;
-        --info: 220 40% 25%;
-        --chart-1: 160 60% 45%;
-        --chart-2: 220 40% 25%;
-        --chart-3: 200 50% 50%;
-        --chart-4: 180 55% 40%;
-        --chart-5: 140 50% 50%;
-        --sidebar-background: 220 30% 12%;
-        --sidebar-foreground: 220 15% 95%;
-        --sidebar-primary: 160 60% 45%;
-        --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 220 25% 18%;
-        --sidebar-accent-foreground: 220 15% 95%;
-        --sidebar-border: 220 20% 20%;
-        --sidebar-ring: 160 60% 45%;
+        /* Radius — slightly more generous for softness */
+        --radius: 0.875rem;
 
-        /* Category Colors - Light Mode */
-        --category-food: 122 39% 49%;
-        /* #4CAF50 */
-        --category-transport: 36 100% 50%;
-        /* #FF9800 */
-        --category-bills: 4 90% 58%;
-        /* #F44336 */
-        --category-entertainment: 291 64% 42%;
-        /* #9C27B0 */
-        --category-shopping: 199 98% 48%;
-        /* #03A9F4 */
-        --category-health: 187 100% 42%;
-        /* #00BCD4 */
-        --category-education: 45 100% 51%;
-        /* #FFC107 */
-        --category-savings: 88 50% 53%;
-        /* #8BC34A */
-        --category-personal: 340 82% 52%;
-        /* #E91E63 */
-        --category-other: 220 13% 46%;
-        /* Muted gray */
+        /* Backgrounds — warm off-white, not flat white */
+        --background: 36 20% 96%;
+        --foreground: 220 25% 15%;
+
+        /* Cards — barely-off-white with a hint of warmth */
+        --card: 0 0% 100%;
+        --card-foreground: 220 22% 16%;
+
+        /* Popover */
+        --popover: 0 0% 100%;
+        --popover-foreground: 220 22% 16%;
+
+        /* Primary — deep teal-slate (trustworthy, financial) */
+        --primary: 215 55% 32%;
+        --primary-foreground: 0 0% 100%;
+
+        /* Secondary — softer muted slate */
+        --secondary: 215 20% 55%;
+        --secondary-foreground: 0 0% 100%;
+
+        /* Muted — warm grey-beige */
+        --muted: 36 15% 92%;
+        --muted-foreground: 220 10% 42%;
+
+        /* Accent — rich emerald (money, positive) */
+        --accent: 158 60% 36%;
+        --accent-foreground: 0 0% 100%;
+
+        /* Destructive */
+        --destructive: 2 72% 50%;
+        --destructive-foreground: 0 0% 100%;
+
+        /* Borders — delicate warm grey */
+        --border: 36 12% 86%;
+        --input: 36 12% 86%;
+        --ring: 158 55% 40%;
+
+        /* Semantic */
+        --success: 158 58% 38%;
+        --warning: 38 90% 50%;
+        --info: 215 55% 40%;
+
+        /* Charts */
+        --chart-1: 158 58% 38%;
+        --chart-2: 215 55% 40%;
+        --chart-3: 198 55% 45%;
+        --chart-4: 178 50% 38%;
+        --chart-5: 138 48% 42%;
+
+        /* Sidebar — deep slate (works well in both modes) */
+        --sidebar-background: 218 35% 14%;
+        --sidebar-foreground: 210 20% 92%;
+        --sidebar-primary: 158 60% 42%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 218 30% 20%;
+        --sidebar-accent-foreground: 210 20% 92%;
+        --sidebar-border: 218 25% 22%;
+        --sidebar-ring: 158 60% 42%;
+
+        /* Category Colors */
+        --category-food: 122 38% 46%;
+        --category-transport: 36 95% 50%;
+        --category-bills: 4 85% 55%;
+        --category-entertainment: 288 58% 42%;
+        --category-shopping: 198 88% 44%;
+        --category-health: 185 90% 40%;
+        --category-education: 44 90% 48%;
+        --category-savings: 90 48% 48%;
+        --category-personal: 338 78% 50%;
+        --category-other: 220 12% 48%;
     }
 
     .dark {
-        --background: 224 38% 9%;
-        --foreground: 220 14% 92%;
-        --card: 223 27% 14%;
-        --card-foreground: 220 9% 91%;
-        --popover: 223 27% 14%;
-        --popover-foreground: 220 9% 91%;
-        --primary: 162 75% 44%;
-        --primary-foreground: 220 9% 91%;
-        --secondary: 217 17% 62%;
-        --secondary-foreground: 220 14% 92%;
-        --muted: 223 20% 20%;
-        --muted-foreground: 220 10% 72%;
-        --accent: 162 75% 44%;
-        --accent-foreground: 220 9% 91%;
-        --destructive: 0 72% 51%;
-        /* #EF4444 - overspend red */
-        --destructive-foreground: 220 9% 91%;
-        --border: 217 33% 17%;
-        /* #1F2937 */
-        --input: 217 33% 17%;
-        --ring: 160 84% 39%;
-        --success: 142 71% 45%;
-        /* #22C55E - under budget */
-        --warning: 38 92% 50%;
-        /* #F59E0B */
-        --info: 199 89% 48%;
-        /* #38BDF8 */
-        --chart-1: 160 84% 39%;
-        --chart-2: 142 71% 45%;
-        --chart-3: 199 89% 48%;
-        --chart-4: 38 92% 50%;
-        --chart-5: 0 72% 51%;
-        --sidebar-background: 210 40% 8%;
-        --sidebar-foreground: 220 9% 91%;
-        --sidebar-primary: 160 84% 39%;
-        --sidebar-primary-foreground: 220 9% 91%;
-        --sidebar-accent: 217 33% 17%;
-        --sidebar-accent-foreground: 220 9% 91%;
-        --sidebar-border: 217 33% 17%;
-        --sidebar-ring: 160 84% 39%;
+        /* Backgrounds — deep indigo-slate, not pure black */
+        --background: 226 30% 8%;
+        --foreground: 210 18% 90%;
 
-        /* Category Colors - Dark Mode (Fixed Palette) */
-        --category-food: 122 39% 49%;
-        /* #4CAF50 - Green */
-        --category-transport: 36 100% 50%;
-        /* #FF9800 - Orange */
-        --category-bills: 4 90% 58%;
-        /* #F44336 - Red */
-        --category-entertainment: 291 64% 42%;
-        /* #9C27B0 - Purple */
-        --category-shopping: 199 98% 48%;
-        /* #03A9F4 - Blue */
-        --category-health: 187 100% 42%;
-        /* #00BCD4 - Cyan */
-        --category-education: 45 100% 51%;
-        /* #FFC107 - Amber */
-        --category-savings: 88 50% 53%;
-        /* #8BC34A - Light Green */
-        --category-personal: 340 82% 52%;
-        /* #E91E63 - Pink */
-        --category-other: 220 9% 46%;
-        /* #6B7280 - Muted */
+        /* Cards — slightly lighter surface */
+        --card: 225 28% 12%;
+        --card-foreground: 210 16% 88%;
+
+        /* Popover */
+        --popover: 225 28% 13%;
+        --popover-foreground: 210 16% 88%;
+
+        /* Primary — bright teal (stands out on dark background) */
+        --primary: 165 72% 44%;
+        --primary-foreground: 226 30% 8%;
+
+        /* Secondary — muted slate */
+        --secondary: 215 18% 60%;
+        --secondary-foreground: 210 18% 90%;
+
+        /* Muted — deep but not black */
+        --muted: 224 22% 18%;
+        --muted-foreground: 215 12% 62%;
+
+        /* Accent — vibrant emerald */
+        --accent: 160 65% 42%;
+        --accent-foreground: 226 30% 8%;
+
+        /* Destructive — warm red */
+        --destructive: 2 68% 52%;
+        --destructive-foreground: 0 0% 98%;
+
+        /* Borders — subtle, barely-there */
+        --border: 222 22% 18%;
+        --input: 222 22% 20%;
+        --ring: 162 72% 42%;
+
+        /* Semantic */
+        --success: 142 65% 42%;
+        --warning: 38 88% 52%;
+        --info: 198 80% 48%;
+
+        /* Charts */
+        --chart-1: 162 72% 42%;
+        --chart-2: 142 65% 42%;
+        --chart-3: 198 80% 48%;
+        --chart-4: 38 88% 52%;
+        --chart-5: 2 68% 52%;
+
+        /* Sidebar */
+        --sidebar-background: 228 38% 7%;
+        --sidebar-foreground: 210 16% 88%;
+        --sidebar-primary: 162 72% 42%;
+        --sidebar-primary-foreground: 228 38% 7%;
+        --sidebar-accent: 222 30% 14%;
+        --sidebar-accent-foreground: 210 16% 88%;
+        --sidebar-border: 222 22% 18%;
+        --sidebar-ring: 162 72% 42%;
+
+        /* Category Colors — same hues, good for dark */
+        --category-food: 122 38% 46%;
+        --category-transport: 36 95% 50%;
+        --category-bills: 4 85% 55%;
+        --category-entertainment: 288 58% 50%;
+        --category-shopping: 198 88% 50%;
+        --category-health: 185 90% 46%;
+        --category-education: 44 90% 52%;
+        --category-savings: 90 48% 52%;
+        --category-personal: 338 78% 56%;
+        --category-other: 220 12% 52%;
     }
 }
 
@@ -140,87 +165,117 @@ All colors MUST be HSL.
         @apply border-border;
     }
 
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
         @apply bg-background text-foreground;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-        transition: background-color 0.3s ease-out, color 0.3s ease-out;
+        /* Subtle warmth gradient — barely visible, not AI-generic */
         background-image:
-            radial-gradient(circle at 8% -5%, hsl(var(--primary) / 0.16), transparent 32%),
-            radial-gradient(circle at 92% 8%, hsl(var(--accent) / 0.12), transparent 28%),
-            radial-gradient(circle at 50% 120%, hsl(var(--secondary) / 0.08), transparent 40%);
+            radial-gradient(ellipse at 0% 0%, hsl(var(--primary) / 0.08) 0%, transparent 40%),
+            radial-gradient(ellipse at 100% 100%, hsl(var(--accent) / 0.08) 0%, transparent 40%);
         background-attachment: fixed;
     }
 
-    /* Smooth transitions for theme switching */
-    * {
-        transition-property: background-color, border-color, color, fill, stroke;
-        transition-duration: 0.28s;
-        transition-timing-function: cubic-bezier(0.25, 0.85, 0.3, 1);
+    /* Theme-aware smooth transitions */
+    *, *::before, *::after {
+        transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+        transition-duration: 250ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Preserve animation and transform transitions */
-    *:where([class*="animate-"], [class*="transition-transform"]) {
+    /* Animation friendly transitions */
+    *:where([class*="animate-"], [class*="transition-transform"], [class*="transition-none"]) {
         transition-property: transform, opacity;
     }
 }
 
-@layer utilities {
-    .app-page {
-        @apply min-h-screen;
-    }
-
-    .app-content {
-        @apply container mx-auto w-full max-w-[1540px] px-4 md:px-8 2xl:px-12;
-    }
-
+@layer components {
+    /* Premium Glass Surfaces */
     .surface-panel {
-        @apply border border-border/70 bg-card/85 backdrop-blur-sm;
+        @apply border border-border/50 bg-card/70 backdrop-blur-md rounded-[0.875rem] transition-all duration-300;
+        box-shadow: 0 4px 12px hsl(var(--foreground) / 0.03), 0 1px 2px hsl(var(--foreground) / 0.02);
     }
 
-    .text-success {
-        color: hsl(var(--success));
+    .dark .surface-panel {
+        @apply bg-card/60 border-border/30;
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.25), 0 2px 4px rgb(0 0 0 / 0.15);
     }
 
-    .text-warning {
-        color: hsl(var(--warning));
+    .surface-panel:hover {
+        @apply border-border/80 ring-1 ring-primary/10;
     }
 
-    .bg-success {
-        background-color: hsl(var(--success));
-    }
-
-    .bg-warning {
-        background-color: hsl(var(--warning));
-    }
-
-    /* Premium number display */
+    /* Typography for numbers */
     .number-display {
         font-variant-numeric: tabular-nums;
         letter-spacing: -0.02em;
     }
 
-    /* Card shadows - Light mode */
+    /* Custom container */
+    .app-page {
+        @apply min-h-screen flex flex-col pt-4 md:pt-8 px-4 max-w-5xl mx-auto w-full;
+    }
+
+    .app-content {
+        @apply flex-grow w-full max-w-3xl mx-auto;
+    }
+
+    /* Mobile Safe Area Padding for Bottom Nav */
+    .pb-nav-safe {
+        padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Shadow tiers */
     .card-shadow {
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+        box-shadow: 0 1px 2px hsl(var(--foreground) / 0.04), 0 2px 8px hsl(var(--foreground) / 0.03);
     }
 
     .card-shadow-lg {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        box-shadow: 0 10px 15px -3px hsl(var(--foreground) / 0.05), 0 4px 6px -2px hsl(var(--foreground) / 0.03);
     }
 
-    /* Card shadows - Dark mode (subtle elevation) */
     .dark .card-shadow {
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3);
     }
 
     .dark .card-shadow-lg {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+        box-shadow: 0 10px 30px rgb(0 0 0 / 0.5), 0 4px 12px rgb(0 0 0 / 0.4);
     }
 
-    /* Hover states - increase brightness, not saturation */
-    .dark button:hover:not(:disabled),
-    .dark [role="button"]:hover:not(:disabled) {
-        filter: brightness(1.1);
+    /* Interactive hover state */
+    .card-interactive {
+        @apply cursor-pointer transition-all duration-200 hover:-translate-y-0.5;
     }
+    .card-interactive:hover {
+        box-shadow: 0 12px 30px -5px hsl(var(--foreground) / 0.1), 0 4px 10px -2px hsl(var(--foreground) / 0.05);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/15 rounded-full hover:bg-muted-foreground/25 transition-colors;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+    animation: fadeIn 0.45s cubic-bezier(0.2, 0, 0, 1) forwards;
 }

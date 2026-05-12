@@ -67,7 +67,7 @@ export default function SpendingForm({ date, onSuccess }: SpendingFormProps) {
     };
 
     return (
-        <Card className="card-shadow border-border">
+        <Card className="surface-panel card-shadow">
             <CardContent className="p-6">
                 <div className="space-y-4">
                     <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">

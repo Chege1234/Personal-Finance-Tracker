@@ -12,7 +12,7 @@ export default function BudgetCard({ budget, totalSpent, remaining }: BudgetCard
     const isOverBudget = remaining < 0;
 
     return (
-        <Card className="card-shadow border-border">
+        <Card className="surface-panel card-shadow">
             <CardContent className="p-6">
                 <div className="space-y-4">
                     <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">

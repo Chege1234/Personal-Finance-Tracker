@@ -74,7 +74,7 @@ export default function SpendingList({ entries, currency, onDelete, showDate = f
 
     if (entries.length === 0) {
         return (
-            <Card className="card-shadow border-border">
+            <Card className="surface-panel card-shadow">
                 <CardContent className="p-6">
                     <div className="space-y-2">
                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
@@ -155,7 +155,7 @@ export default function SpendingList({ entries, currency, onDelete, showDate = f
     };
 
     return (
-        <Card className="card-shadow border-border">
+        <Card className="surface-panel card-shadow">
             <CardContent className="p-6">
                 <div className="space-y-4">
                     <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">

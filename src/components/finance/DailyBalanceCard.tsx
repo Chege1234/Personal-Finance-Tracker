@@ -16,7 +16,7 @@ export default function DailyBalanceCard({ balance, currency }: DailyBalanceCard
     const overspentAmount = isOverspent ? Math.abs(availableToday) : 0;
 
     return (
-        <Card className="card-shadow-lg border-border">
+        <Card className="surface-panel card-shadow-lg">
             <CardContent className="p-6 md:p-8">
                 <div className="space-y-4">
                     <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">

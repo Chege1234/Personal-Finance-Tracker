@@ -10,6 +10,9 @@ const Signup = lazy(() => import('./pages/Signup'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 const AdminPanel = lazy(() => import('./pages/AdminPanel'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Legal = lazy(() => import('./pages/Legal'));
 
 interface RouteConfig {
     name: string;
@@ -71,6 +74,24 @@ const routes: RouteConfig[] = [
         name: 'Admin Panel',
         path: '/admin',
         element: <AdminPanel />,
+        visible: false,
+    },
+    {
+        name: 'Privacy',
+        path: '/privacy',
+        element: <Privacy />,
+        visible: false,
+    },
+    {
+        name: 'Terms',
+        path: '/terms',
+        element: <Terms />,
+        visible: false,
+    },
+    {
+        name: 'Legal',
+        path: '/legal',
+        element: <Legal />,
         visible: false,
     },
 ];

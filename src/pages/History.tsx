@@ -134,7 +134,7 @@ export default function History() {
     }
 
     return (
-        <div className="app-page">
+        <div className="app-page animate-in">
             <div className="app-content space-y-8 py-6 md:py-8">
                 {/* Header with Navigation */}
                 <div className="flex items-center justify-between flex-wrap gap-4">

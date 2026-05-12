@@ -164,7 +164,7 @@ export default function Dashboard() {
     const remaining = budget.monthly_amount - totalSpent;
 
     return (
-        <div className="app-page">
+        <div className="app-page animate-in">
             <div className="app-content py-6 md:py-8">
                 <div className="mb-8">
                     <div className="mb-2 flex items-center justify-between">
