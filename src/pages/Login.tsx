@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '@/contexts/AuthContext';
 import { Loader2, Wallet } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const loginSchema = z.object({
     email: z.string().email('Please enter a valid email address'),
@@ -264,6 +265,5 @@ export default function Login() {
             </div>
         </div>
     );
-}
 }
 
